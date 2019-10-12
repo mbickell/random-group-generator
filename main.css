@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background-color: bisque; 
+}
+
+header {
+  background-color: black;
+  color: white;
+  text-align: center;
+  height: 20vh;
+}
+
+h1, h2 {
+  background-color: black;
+  padding-top: 5vh; 
+}
+
+main {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 60vw;
+  height: 80vh;
+  margin: auto;
+}
+
+section {
+  width: 350px;
+  text-align: center;
+  border: 2px solid black;
+  border-radius: 10px;
+  height: 200px;
+}
+
+h3 {
+  background-color: black;
+  color: white;
+  padding: 8px;
+  font-size: 1.5em;
+}
+
+ul {
+  display: inline-block;
+  list-style: inside; 
+  font-size: 1.5em;
+  padding: 8px;
+  text-align: justify;
+}
+
+li {
+  padding: 8px;
+}
