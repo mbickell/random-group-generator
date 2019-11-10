@@ -1,29 +1,63 @@
+import {
+  generateRandomNologists,
+  insertNologists,
+  generateGroupContainers,
+  renderGroupContainers
+} from "./groupGeneration.js";
+
 let nologists = [
-  "Adam", "Aleo", "Alex", "Clara", "Dan", "Kat", "Matt", "Maya", "Sam"
+  "Adam",
+  "Aleo",
+  "Alex",
+  "Clara",
+  "Dan",
+  "Kat",
+  "Matt",
+  "Maya",
+  "Sam"
 ];
-let randomNologists = [];
 
-const generateRandomNumber = array => Math.floor(Math.random() * array.length);
 
-const generateRandomGroups = array => {
-  while (array.length > 0) {
-    randomNologists.push(array.splice(generateRandomNumber(array), 1));
+const generateGroupLoop = () => {
+  nologists = [
+    "Adam",
+    "Aleo",
+    "Alex",
+    "Clara",
+    "Dan",
+    "Kat",
+    "Matt",
+    "Maya",
+    "Sam"
+  ];
+
+  $("main").empty();
+
+  let colorArray = [];
+  while (colorArray.length < 10) {
+    let r = Math.floor(Math.random() * 255 + 1);
+    let g = Math.floor(Math.random() * 255 + 1);
+    let b = Math.floor(Math.random() * 255 + 1);
+    colorArray.push(`rgb(${r}, ${g}, ${b})`);
+
   }
-  insertNologists(randomNologists);
-}
-
-const insertNologists = array => {
-  $("#group-one").append(`<ul><li>${array[0]}</li><li>${array[1]}</li><li>${array[2]}</li></ul>`);
-  $("#group-two").append(`<ul><li>${array[3]}</li><li>${array[4]}</li><li>${array[5]}</li></ul>`);
-  $("#group-three").append(`<ul><li>${array[6]}</li><li>${array[7]}</li><li>${array[8]}</li></ul>`);
-}
 
 
-generateRandomGroups(nologists);
+  const numberOfGroups = $("#numberOfGroups").val();
+  renderGroupContainers(generateGroupContainers(numberOfGroups));
+  insertNologists(generateRandomNologists(nologists), numberOfGroups);
 
-$("button").click( () => {
-  nologists = ["Adam", "Aleo", "Alex", "Clara", "Dan", "Kat", "Matt", "Maya", "Sam"];
-  randomNologists = [];
-  generateRandomGroups(nologists);
-})
 
+  $("main > *").css("opacity", "0");
+  colorArray.forEach((color, index) => {
+    setTimeout(() => {
+      $("#curtain").css("background-color", color);
+      $("main").css("background-color", color);
+    }, 300 * index);
+  });
+  setTimeout(() => {
+    $("main > *").css("opacity", "1");
+  }, 300 * colorArray.length);
+};
+
+$("#generateButton").click(generateGroupLoop);

@@ -2,10 +2,20 @@
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/preset-env": "^7.6.3",
+    "@types/jest": "^24.0.19",
+    "@types/jquery": "^3.3.31",
     "babel-jest": "^24.9.0",
     "jest": "^24.9.0"
   },
   "scripts": {
     "test": "jest"
+  },
+  "dependencies": {
+    "jquery": "^3.4.1"
+  },
+  "jest": {
+    "setupFiles": [
+      "./testSetup.js"
+    ]
   }
 }

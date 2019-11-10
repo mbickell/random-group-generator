@@ -2,15 +2,14 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  background-color: bisque; 
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 header {
   background-color: black;
   color: white;
   text-align: center;
-  min-height: 15vh;
+  height: 30vh;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -18,14 +17,16 @@ header {
   padding: 8px 0;
 }
 
-h1, h2, button {
+h1,
+h2,
+button {
   background-color: black;
   color: white;
 }
 
-button {
-  display: none;
+#generateButton {
   font-size: 20px;
+  margin: auto;
   width: 150px;
   height: 50px;
   cursor: pointer;
@@ -33,9 +34,35 @@ button {
   background-color: #353333;
 }
 
-button:hover {
+#generateButton:hover {
   background-color: white;
   color: black;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  color: white;
+  background-color: inherit;
+  width: 25vw;
+  text-align: left;
+}
+
+form > * {
+  color: white;
+  border: none;
+  background-color: inherit;
+  font-size: 1.2em;
+  margin: 2vh 0;
+}
+
+form label {
+  width: 70%;
+}
+
+form input {
+  background-color: rgb(44, 44, 44);
+  width: 30%;
 }
 
 main {
@@ -43,17 +70,19 @@ main {
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
-  width: 60vw;
+  width: 100vw;
   height: 80vh;
   margin: auto;
 }
 
 section {
-  width: 350px;
+  width: 300px;
+  margin: 10px;
   text-align: center;
   border: 2px solid black;
   border-radius: 10px;
-  height: 200px;
+  transition: 0.5s;
+  background-color: white;
 }
 
 h3 {
@@ -64,13 +93,15 @@ h3 {
 }
 
 ul {
-  display: inline-block;
-  list-style: inside; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
   font-size: 1.5em;
-  padding: 8px;
-  text-align: justify;
+  margin: 8px;
 }
 
 li {
   padding: 8px;
+  min-width: 50px;
 }
