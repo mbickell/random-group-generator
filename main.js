@@ -1,3 +1,10 @@
+import {
+  generateRandomNologists,
+  insertNologists,
+  generateGroupContainers,
+  renderGroupContainers
+} from "./groupGeneration.js";
+
 let nologists = [
   "Adam",
   "Aleo",
@@ -10,17 +17,7 @@ let nologists = [
   "Sam"
 ];
 
-import {
-  generateRandomNologists,
-  insertNologists,
-  // generateGroups,
-  generateGroupContainers,
-  renderGroupContainers
-} from "./groupGeneration.js";
-
-// insertNologists(generateRandomNologists(nologists))
-
-$("button").click(() => {
+const generateGroupLoop = () => {
   nologists = [
     "Adam",
     "Aleo",
@@ -32,13 +29,31 @@ $("button").click(() => {
     "Maya",
     "Sam"
   ];
-  insertNologists(generateRandomNologists(nologists));
-});
 
-// insertNologists(generateRandomNologists(nologists))
+  $("main").empty();
 
-// generateGroups(nologists, 3, 3);
+  let colorArray = [];
+  while (colorArray.length < 10) {
+    let r = Math.floor(Math.random() * 255 + 1);
+    let g = Math.floor(Math.random() * 255 + 1);
+    let b = Math.floor(Math.random() * 255 + 1);
+    colorArray.push(`rgb(${r}, ${g}, ${b})`);
+  }
 
-renderGroupContainers(generateGroupContainers(3));
+  const numberOfGroups = $("#numberOfGroups").val();
+  renderGroupContainers(generateGroupContainers(numberOfGroups));
+  insertNologists(generateRandomNologists(nologists), numberOfGroups);
 
-insertNologists(generateRandomNologists(nologists), 3, 3);
+  $("main > *").css("opacity", "0");
+  colorArray.forEach((color, index) => {
+    setTimeout(() => {
+      $("#curtain").css("background-color", color);
+      $("main").css("background-color", color);
+    }, 300 * index);
+  });
+  setTimeout(() => {
+    $("main > *").css("opacity", "1");
+  }, 300 * colorArray.length);
+};
+
+$("#generateButton").click(generateGroupLoop);
