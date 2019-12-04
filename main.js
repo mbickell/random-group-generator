@@ -43,8 +43,10 @@ const generateGroupLoop = () => {
   let numberOfGroups = $("#numberOfGroups").val();
   if (numberOfGroups > 9) {
     numberOfGroups = 9;
+    $("#numberOfGroups").val(9);
   } else if (numberOfGroups < 1) {
     numberOfGroups = 1;
+    $("#numberOfGroups").val(1);
   }
   console.log(numberOfGroups);
   renderGroupContainers(generateGroupContainers(numberOfGroups));
