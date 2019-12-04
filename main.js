@@ -40,7 +40,13 @@ const generateGroupLoop = () => {
     colorArray.push(`rgb(${r}, ${g}, ${b})`);
   }
 
-  const numberOfGroups = $("#numberOfGroups").val();
+  let numberOfGroups = $("#numberOfGroups").val();
+  if (numberOfGroups > 9) {
+    numberOfGroups = 9;
+  } else if (numberOfGroups < 1) {
+    numberOfGroups = 1;
+  }
+  console.log(numberOfGroups);
   renderGroupContainers(generateGroupContainers(numberOfGroups));
   insertNologists(generateRandomNologists(nologists), numberOfGroups);
 
