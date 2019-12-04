@@ -17,7 +17,6 @@ let nologists = [
   "Sam"
 ];
 
-
 const generateGroupLoop = () => {
   nologists = [
     "Adam",
@@ -39,14 +38,11 @@ const generateGroupLoop = () => {
     let g = Math.floor(Math.random() * 255 + 1);
     let b = Math.floor(Math.random() * 255 + 1);
     colorArray.push(`rgb(${r}, ${g}, ${b})`);
-
   }
-
 
   const numberOfGroups = $("#numberOfGroups").val();
   renderGroupContainers(generateGroupContainers(numberOfGroups));
   insertNologists(generateRandomNologists(nologists), numberOfGroups);
-
 
   $("main > *").css("opacity", "0");
   colorArray.forEach((color, index) => {
@@ -61,3 +57,15 @@ const generateGroupLoop = () => {
 };
 
 $("#generateButton").click(generateGroupLoop);
+
+$("form").keydown(e => {
+  if (e.which == 13) {
+    generateGroupLoop();
+    return false;
+  }
+});
+
+$("#numberOfGroups").attr({
+  max: nologists.length,
+  min: 1
+});
