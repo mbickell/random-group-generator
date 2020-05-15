@@ -2,33 +2,37 @@ import {
   generateRandomNologists,
   insertNologists,
   generateGroupContainers,
-  renderGroupContainers
+  renderGroupContainers,
 } from "./groupGeneration.js";
 
 let nologists = [
-  "Adam",
-  "Aleo",
-  "Alex",
-  "Clara",
-  "Dan",
-  "Kat",
-  "Matt",
-  "Maya",
-  "Sam"
+  "Emmanuel",
+  "Will",
+  "Aqeel",
+  "Louis",
+  "Toby",
+  "Stephanie",
+  "Martin",
+  "Roki",
+  "Cherise",
+  "Rebecca",
+  "Edward",
+  "Mairead",
+  "Melissa",
+  "Cristian",
+  "Phillip",
+  "Niall",
+  "Amina",
+  "Oliver",
+  "Shane",
+  "Edwin",
+  "Severine",
+  "David",
+  "Sumit",
 ];
 
 const generateGroupLoop = () => {
-  nologists = [
-    "Adam",
-    "Aleo",
-    "Alex",
-    "Clara",
-    "Dan",
-    "Kat",
-    "Matt",
-    "Maya",
-    "Sam"
-  ];
+  let copyNologists = [...nologists];
 
   $("main").empty();
 
@@ -50,7 +54,7 @@ const generateGroupLoop = () => {
   }
   console.log(numberOfGroups);
   renderGroupContainers(generateGroupContainers(numberOfGroups));
-  insertNologists(generateRandomNologists(nologists), numberOfGroups);
+  insertNologists(generateRandomNologists(copyNologists), numberOfGroups);
 
   $("main > *").css("opacity", "0");
   colorArray.forEach((color, index) => {
@@ -74,6 +78,6 @@ $("form").keydown(e => {
 });
 
 $("#numberOfGroups").attr({
-  max: nologists.length,
-  min: 1
+  max: copyNologists.length,
+  min: 1,
 });
