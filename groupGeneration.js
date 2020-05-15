@@ -1,13 +1,10 @@
-export const generateRandomNumber = array =>
-  Math.floor(Math.random() * array.length);
+export const generateRandomNumber = array => Math.floor(Math.random() * array.length);
 
 export const generateGroupContainers = numberOfGroups => {
   const groupContainers = [];
   numberOfGroups++;
   for (let i = 1; i < numberOfGroups; i++) {
-    groupContainers.push(
-      `<section><h3>Group ${i}</h3><ul id="group-${i}"></ul></section>`
-    );
+    groupContainers.push(`<section><h3>Group ${i}</h3><ul id="group-${i}"></ul></section>`);
   }
   return groupContainers;
 };
