@@ -17,25 +17,26 @@ export const renderGroupContainers = groupContainers => {
 
 const setLoner = (array, numberOfGroups) => {
   if (array.length % numberOfGroups !== 0) {
-    const loner = `<section><h3>Loner :(</h3><ul><li>${array.shift()}</li></ul></section>`;
-    $("main").append(loner);
+    const loners = array.map(student => `<li>${student}</li>`).join("");
+    const lonerBox = `<section><h3>Loner :(</h3><ul>${loners}</ul></section>`;
+    $("main").append(lonerBox);
   }
 };
 
 const putNologists = (array, groupSize) => {
   let groupArray = [];
   for (let i = 0; i < groupSize; i++) {
-    groupArray += `<li>${array.shift()}</li>`;
+    array[0] ? (groupArray += `<li>${array.shift()}</li>`) : "";
   }
   return groupArray;
 };
 
 export const insertNologists = (array, numberOfGroups) => {
-  const groupSize = Math.floor(array.length / numberOfGroups);
-  setLoner(array, numberOfGroups);
+  const groupSize = Math.ceil(array.length / numberOfGroups);
   for (let i = 1; i <= numberOfGroups; i++) {
     $(`#group-${i}`).append(putNologists(array, groupSize));
   }
+  setLoner(array, numberOfGroups);
 };
 
 export const generateRandomNologists = array => {
