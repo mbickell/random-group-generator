@@ -1,40 +1,33 @@
+/* 
+Change to number of people per group.
+Find number of groups needed
+Create random arrays for groups
+Render those arrays into group containers
+Profit
+*/
+
 import {
-  generateRandomNologists,
+  randomiseNologists,
+  findNumberOfGroups,
+  createRandomGroups,
+  createGroupContainers,
   insertNologists,
-  generateGroupContainers,
-  renderGroupContainers,
 } from "./groupGeneration.js";
 
-let nologists = [
-  "Emmanuel",
-  "Will",
-  "Aqeel",
-  "Louis",
-  "Toby",
-  "Stephanie",
-  "Martin",
-  "Roki",
-  "Cherise",
-  "Rebecca",
-  "Edward",
-  "Mairead",
-  "Melissa",
-  "Cristian",
-  "Phillip",
-  "Niall",
-  "Amina",
-  "Oliver",
-  "Shane",
-  "Edwin",
-  "Severine",
-  "David",
-  "Sumit",
-];
+import nologists from "./nologsists.js";
+
+// const randomNologists = randomiseNologists(nologists);
+
+// const groups = createRandomGroups(randomNologists, 3);
+
+// createGroupContainers(7);
+
+// insertNologists(groups);
 
 const generateGroupLoop = () => {
-  let copyNologists = [...nologists];
+  const randomNologists = randomiseNologists([...nologists].sort());
 
-  $("main").empty();
+  document.querySelector("main").innerHTML = "";
 
   let colorArray = [];
   while (colorArray.length < 10) {
@@ -44,17 +37,15 @@ const generateGroupLoop = () => {
     colorArray.push(`rgb(${r}, ${g}, ${b})`);
   }
 
-  let numberOfGroups = $("#numberOfGroups").val();
-  if (numberOfGroups > nologists.length) {
-    numberOfGroups = nologists.length;
-    $("#numberOfGroups").val(nologists.length);
-  } else if (numberOfGroups < 1) {
-    numberOfGroups = 1;
-    $("#numberOfGroups").val(1);
-  }
+  const peoplePerGroup = document.querySelector("#number-of-people-per-group").value;
+  const numberOfGroups = findNumberOfGroups(peoplePerGroup, randomNologists);
   console.log(numberOfGroups);
-  renderGroupContainers(generateGroupContainers(numberOfGroups));
-  insertNologists(generateRandomNologists(copyNologists), numberOfGroups);
+
+  const groups = createRandomGroups(randomNologists, peoplePerGroup);
+  console.log(groups);
+
+  createGroupContainers(numberOfGroups);
+  insertNologists(groups);
 
   $("main > *").css("opacity", "0");
   colorArray.forEach((color, index) => {
