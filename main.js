@@ -1,10 +1,4 @@
-/* 
-Change to number of people per group.
-Find number of groups needed
-Create random arrays for groups
-Render those arrays into group containers
-Profit
-*/
+import nologists from "./static/data/nologsists.js";
 
 import {
   randomiseNologists,
@@ -12,17 +6,7 @@ import {
   createRandomGroups,
   createGroupContainers,
   insertNologists,
-} from "./groupGeneration.js";
-
-import nologists from "./nologsists.js";
-
-// const randomNologists = randomiseNologists(nologists);
-
-// const groups = createRandomGroups(randomNologists, 3);
-
-// createGroupContainers(7);
-
-// insertNologists(groups);
+} from "./static/modules/groupGeneration.js";
 
 const generateGroupLoop = () => {
   const randomNologists = randomiseNologists([...nologists].sort());

@@ -1,4 +1,4 @@
-import * as functions from "./groupGeneration";
+import * as functions from "./static/modules/groupGeneration.js";
 
 describe("Random groups", () => {
   let nologists = ["Adam", "Aleo", "Alex", "Clara", "Dan", "Kat", "Matt", "Maya", "Sam"];
@@ -11,9 +11,6 @@ describe("Random groups", () => {
   });
 
   test("Based on the random number, nologists should be placed in a new array", () => {
-    expect(functions.generateRandomNologists(nologists)[0]).toBe("Dan");
+    expect(functions.randomiseNologists(nologists)[0]).toBe("Adam");
   });
-
-  test("A string of <li> tags should be generated, based on the size of groups");
-  expect(functions.generateGroups(nologists, 3)).toBe("<ul><li>Dan</li><li>Kat</li><li>Matt</li></ul>");
 });
