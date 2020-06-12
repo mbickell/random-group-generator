@@ -10,11 +10,26 @@ header {
   color: white;
   text-align: center;
   height: 30vh;
+  padding: 8px 0;
+}
+
+.head {
+  display: flex;
+  justify-content: space-evenly;
+  height: 80%;
+}
+
+aside {
+  width: 40vw;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  padding: 8px 0;
+  flex-wrap: wrap;
+}
+
+aside div {
+  text-align: left;
+  font-size: 20px;
 }
 
 h1,
@@ -40,12 +55,8 @@ button {
 }
 
 form {
-  display: flex;
-  flex-wrap: wrap;
   color: white;
   background-color: inherit;
-  width: 25vw;
-  text-align: left;
 }
 
 form > * {
@@ -53,7 +64,7 @@ form > * {
   border: none;
   background-color: inherit;
   font-size: 1.2em;
-  margin: 2vh 0;
+  margin: 4vh 0;
 }
 
 form label {
@@ -75,7 +86,7 @@ main {
   margin: auto;
 }
 
-section {
+.group {
   width: 300px;
   margin: 10px;
   text-align: center;
@@ -104,4 +115,10 @@ ul {
 li {
   padding: 8px;
   min-width: 50px;
+}
+
+@media only screen and (max-width: 768px) {
+  aside {
+    display: none;
+  }
 }

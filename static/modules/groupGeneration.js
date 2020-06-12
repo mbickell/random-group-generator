@@ -1,9 +1,7 @@
-export const generateRandomNumber = array => Math.floor(Math.random() * array.length);
+export const generateRandomNumber = maximumNumber => Math.floor(Math.random() * maximumNumber);
 
 export const findNumberOfGroups = (peoplePerGroup, nologists) =>
   nologists.length % peoplePerGroup ? Math.ceil(nologists.length / peoplePerGroup) : nologists.length / peoplePerGroup;
-
-// const isThereEnoughPeople = (array, numberOfGroups) => array.length % numberOfGroups
 
 export const randomiseNologists = orderedNologists => orderedNologists.sort((a, b) => 0.5 - Math.random());
 
@@ -23,7 +21,9 @@ export const createRandomGroups = (randomNologists, peoplePerGroup) => {
 
 export const createGroupContainers = numberOfGroups => {
   for (let i = 1; i <= numberOfGroups; i++)
-    document.querySelector("main").innerHTML += `<section><h3>Group ${i}</h3><ul id="group-${i}"></ul></section>`;
+    document.querySelector(
+      "main"
+    ).innerHTML += `<section class="group" ><h3>Group ${i}</h3><ul id="group-${i}"></ul></section>`;
 };
 
 export const insertNologists = groups => {
@@ -35,32 +35,44 @@ export const insertNologists = groups => {
   });
 };
 
-// export const renderGroupContainers = groupContainers => {
-//   groupContainers.forEach(group => {
-//     $("main").append(group);
-//   });
-// };
+export const addCheckboxes = nologists => {
+  const aside = document.querySelector("aside");
+  nologists.forEach((nologist, index) => {
+    aside.innerHTML += `
+      <div>
+        <input type="checkbox" id=nologist-${index} name=nologist-${index} value=${nologist} checked>
+        <label for=nologist-${index}>${nologist}</label>
+      </div>
+    `;
+  });
+};
 
-// const putNologists = (array, groupSize) => {
-//   let groupArray = [];
-//   for (let i = 0; i < groupSize; i++) {
-//     array[0] ? (groupArray += `<li>${array.shift()}</li>`) : "";
-//   }
-//   return groupArray;
-// };
+export const createColourArray = () => {
+  const colorArray = [];
+  while (colorArray.length < 10) {
+    const r = generateRandomNumber(256);
+    const g = generateRandomNumber(256);
+    const b = generateRandomNumber(256);
+    colorArray.push(`rgb(${r}, ${g}, ${b})`);
+  }
+  return colorArray;
+};
 
-// export const insertNologists = (array, numberOfGroups) => {
-//   const groupSize = Math.ceil(array.length / numberOfGroups);
-//   for (let i = 1; i <= numberOfGroups; i++) {
-//     $(`#group-${i}`).append(putNologists(array, groupSize));
-//   }
-//   setLoner(array, numberOfGroups);
-// };
+const changeOpacity = (elements, opacity) => {
+  elements.forEach(element => {
+    element.style.opacity = opacity;
+  });
+};
 
-// export const generateRandomNologists = array => {
-//   let randomNologists = [];
-//   while (array.length > 0) {
-//     randomNologists.push(array.splice(generateRandomNumber(array), 1));
-//   }
-//   return randomNologists.flat();
-// };
+export const flashColours = colourArray => {
+  const allElements = document.querySelectorAll("main > *");
+  changeOpacity(allElements, 0);
+  colourArray.forEach((color, index) => {
+    setTimeout(() => {
+      document.querySelector("main").style.backgroundColor = color;
+    }, 300 * index);
+  });
+  setTimeout(() => {
+    changeOpacity(allElements, 1);
+  }, 300 * colourArray.length);
+};

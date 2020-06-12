@@ -1,58 +1,58 @@
 import nologists from "./static/data/nologsists.js";
 
 import {
+  generateRandomNumber,
   randomiseNologists,
   findNumberOfGroups,
   createRandomGroups,
   createGroupContainers,
   insertNologists,
+  addCheckboxes,
+  createColourArray,
+  flashColours,
 } from "./static/modules/groupGeneration.js";
 
+addCheckboxes(nologists);
+
+const checkboxes = document.querySelectorAll("aside input");
+const numberPerGroup = document.querySelector("#number-of-people-per-group");
+
+checkboxes.forEach(checkbox => {
+  checkbox.addEventListener("click", event => {
+    const id = event.target.id.replace(/\D/g, "");
+
+    nologists.includes(event.target.value) ? (nologists[id] = "") : (nologists[id] = event.target.value);
+    numberPerGroup.max = nologists.filter(nologist => nologist).length;
+  });
+});
+
 const generateGroupLoop = () => {
-  const randomNologists = randomiseNologists([...nologists].sort());
+  const filteredNologists = nologists.filter(nologist => nologist).sort();
+  const randomNologists = randomiseNologists(filteredNologists);
 
   document.querySelector("main").innerHTML = "";
 
-  let colorArray = [];
-  while (colorArray.length < 10) {
-    let r = Math.floor(Math.random() * 255 + 1);
-    let g = Math.floor(Math.random() * 255 + 1);
-    let b = Math.floor(Math.random() * 255 + 1);
-    colorArray.push(`rgb(${r}, ${g}, ${b})`);
-  }
-
-  const peoplePerGroup = document.querySelector("#number-of-people-per-group").value;
+  const peoplePerGroup = numberPerGroup.value;
   const numberOfGroups = findNumberOfGroups(peoplePerGroup, randomNologists);
-  console.log(numberOfGroups);
 
   const groups = createRandomGroups(randomNologists, peoplePerGroup);
-  console.log(groups);
 
   createGroupContainers(numberOfGroups);
   insertNologists(groups);
 
-  $("main > *").css("opacity", "0");
-  colorArray.forEach((color, index) => {
-    setTimeout(() => {
-      $("#curtain").css("background-color", color);
-      $("main").css("background-color", color);
-    }, 300 * index);
-  });
-  setTimeout(() => {
-    $("main > *").css("opacity", "1");
-  }, 300 * colorArray.length);
+  const colorArray = createColourArray();
+  flashColours(colorArray);
 };
 
-$("#generateButton").click(generateGroupLoop);
+document.querySelector("#generateButton").addEventListener("click", generateGroupLoop);
 
-$("form").keydown(e => {
-  if (e.which == 13) {
+document.querySelector("form").addEventListener("keydown", event => {
+  if (event.which === 13 && numberPerGroup.value <= nologists.filter(nologist => nologist).length) {
+    event.preventDefault();
     generateGroupLoop();
     return false;
   }
 });
 
-$("#numberOfGroups").attr({
-  max: nologists.length,
-  min: 1,
-});
+numberPerGroup.max = nologists.filter(nologist => nologist).length;
+numberPerGroup.min = 1;
