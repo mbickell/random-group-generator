@@ -18,7 +18,7 @@ export default [
   // "Amina",
   "Oli",
   "Shane",
-  "Edwin",
+  // "Edwin",
   "Sev",
   "David",
   "Sumit",
