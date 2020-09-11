@@ -38,7 +38,7 @@ const generateGroupLoop = (nologists, groupName) => {
   insertNologists(groups, groupName);
 };
 
-document.querySelector("#generateButton").addEventListener("click", () => {
+const generateAnimalOrCourseGroups = () => {
   document.querySelector("main").innerHTML = "";
 
   if (document.querySelector("#animal-groups").checked) {
@@ -49,20 +49,16 @@ document.querySelector("#generateButton").addEventListener("click", () => {
     generateGroupLoop(allNologists, "Group");
   }
   flashColours(createColourArray());
+};
+
+document.querySelector("#generateButton").addEventListener("click", () => {
+  generateAnimalOrCourseGroups();
 });
 
 document.querySelector("form").addEventListener("keydown", event => {
   if (event.which === 13 && numberPerGroup.value <= allNologists.filter(nologist => nologist).length) {
     event.preventDefault();
-    document.querySelector("main").innerHTML = "";
-
-    if (document.querySelector("#animal-groups").checked) {
-      generateGroupLoop(wolffish, "Wolffish");
-      generateGroupLoop(frilledSharks, "Sharks");
-      generateGroupLoop(spiderCrabs, "Crabs");
-    } else {
-      generateGroupLoop(allNologists, "Group");
-    }
+    generateAnimalOrCourseGroups();
   }
 });
 
