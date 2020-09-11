@@ -35,8 +35,8 @@ aside div {
 h1,
 h2,
 button {
-  background-color: black;
-  color: white;
+  background-color: #141414;
+  color: #f0f0f0;
 }
 
 #generateButton {
@@ -45,22 +45,22 @@ button {
   width: 150px;
   height: 50px;
   cursor: pointer;
-  border: 2px solid white;
+  border: 2px solid #f0f0f0;
   background-color: #353333;
 }
 
 #generateButton:hover {
-  background-color: white;
-  color: black;
+  background-color: #f0f0f0;
+  color: #141414;
 }
 
 form {
-  color: white;
+  color: #f0f0f0;
   background-color: inherit;
 }
 
 form > * {
-  color: white;
+  color: #f0f0f0;
   border: none;
   background-color: inherit;
   font-size: 1.2em;
@@ -94,10 +94,10 @@ main {
   width: 300px;
   margin: 10px;
   text-align: center;
-  border: 2px solid black;
+  border: 2px solid #141414;
   border-radius: 10px;
   transition: 0.5s;
-  background-color: white;
+  background-color: #fafafa;
 }
 
 .Wolffish {
@@ -113,8 +113,8 @@ main {
 }
 
 h3 {
-  background-color: black;
-  color: white;
+  background-color: #141414;
+  color: #f0f0f0;
   padding: 8px;
   font-size: 1.5em;
 }

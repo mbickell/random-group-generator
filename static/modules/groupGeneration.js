@@ -55,7 +55,7 @@ export const createColourArray = () => {
     const b = generateRandomNumber(256);
     colorArray.push(`rgb(${r}, ${g}, ${b})`);
   }
-  colorArray.push("rgb(240, 240, 240)");
+  colorArray.push("rgb(230, 230, 230)");
   return colorArray;
 };
 
