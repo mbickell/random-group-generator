@@ -1,7 +1,6 @@
 import nologists from "./static/data/nologsists.js";
 
 import {
-  generateRandomNumber,
   randomiseNologists,
   findNumberOfGroups,
   createRandomGroups,
@@ -9,7 +8,7 @@ import {
   insertNologists,
   addCheckboxes,
   createColourArray,
-  flashColours,
+  flashColours
 } from "./static/modules/groupGeneration.js";
 
 addCheckboxes(nologists);
