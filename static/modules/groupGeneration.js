@@ -16,6 +16,11 @@ export const createRandomGroups = (randomNologists, peoplePerGroup) => {
     }
   });
 
+  if (groups[groups.length - 1].length === 1) {
+    const finalPerson = groups.pop();
+    groups[groups.length - 1].push(finalPerson[0]);
+  }
+  console.log(groups);
   return groups;
 };
 

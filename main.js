@@ -30,11 +30,11 @@ const generateGroupLoop = (nologists, groupName) => {
   const randomNologists = randomiseNologists(filteredNologists);
 
   const peoplePerGroup = numberPerGroup.value;
-  const numberOfGroups = findNumberOfGroups(peoplePerGroup, randomNologists);
+  // const numberOfGroups = findNumberOfGroups(peoplePerGroup, randomNologists);
 
   const groups = createRandomGroups(randomNologists, peoplePerGroup);
 
-  createGroupContainers(numberOfGroups, groupName);
+  createGroupContainers(groups.length, groupName);
   insertNologists(groups, groupName);
 };
 
