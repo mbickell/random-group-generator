@@ -19,16 +19,16 @@ export const createRandomGroups = (randomNologists, peoplePerGroup) => {
   return groups;
 };
 
-export const createGroupContainers = numberOfGroups => {
+export const createGroupContainers = (numberOfGroups, groupName) => {
   for (let i = 1; i <= numberOfGroups; i++)
     document.querySelector(
       "main"
-    ).innerHTML += `<section class="group" ><h3>Group ${i}</h3><ul id="group-${i}"></ul></section>`;
+    ).innerHTML += `<section class="group" ><h3>${groupName} ${i}</h3><ul id="${groupName}-${i}"></ul></section>`;
 };
 
-export const insertNologists = groups => {
+export const insertNologists = (groups, groupName) => {
   groups.forEach((group, groupNumber) => {
-    const groupContainer = document.querySelector(`#group-${groupNumber + 1}`);
+    const groupContainer = document.querySelector(`#${groupName}-${groupNumber + 1}`);
     group.forEach(nologist => {
       groupContainer.innerHTML += `<li>${nologist}</li>`;
     });

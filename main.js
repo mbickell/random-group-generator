@@ -1,4 +1,4 @@
-import nologists from "./static/data/nologsists.js";
+import { allNologists, wolffish, frilledSharks, spiderCrabs } from "./static/data/nologsists.js";
 
 import {
   randomiseNologists,
@@ -11,7 +11,7 @@ import {
   flashColours
 } from "./static/modules/groupGeneration.js";
 
-addCheckboxes(nologists);
+addCheckboxes(allNologists);
 
 const checkboxes = document.querySelectorAll("aside input");
 const numberPerGroup = document.querySelector("#number-of-people-per-group");
@@ -20,38 +20,51 @@ checkboxes.forEach(checkbox => {
   checkbox.addEventListener("click", event => {
     const id = event.target.id.replace(/\D/g, "");
 
-    nologists.includes(event.target.value) ? (nologists[id] = "") : (nologists[id] = event.target.value);
-    numberPerGroup.max = nologists.filter(nologist => nologist).length;
+    allNologists.includes(event.target.value) ? (allNologists[id] = "") : (allNologists[id] = event.target.value);
+    numberPerGroup.max = allNologists.filter(nologist => nologist).length;
   });
 });
 
-const generateGroupLoop = () => {
+const generateGroupLoop = (nologists, groupName) => {
   const filteredNologists = nologists.filter(nologist => nologist).sort();
   const randomNologists = randomiseNologists(filteredNologists);
-
-  document.querySelector("main").innerHTML = "";
 
   const peoplePerGroup = numberPerGroup.value;
   const numberOfGroups = findNumberOfGroups(peoplePerGroup, randomNologists);
 
   const groups = createRandomGroups(randomNologists, peoplePerGroup);
 
-  createGroupContainers(numberOfGroups);
-  insertNologists(groups);
-
-  const colorArray = createColourArray();
-  flashColours(colorArray);
+  createGroupContainers(numberOfGroups, groupName);
+  insertNologists(groups, groupName);
 };
 
-document.querySelector("#generateButton").addEventListener("click", generateGroupLoop);
+document.querySelector("#generateButton").addEventListener("click", () => {
+  document.querySelector("main").innerHTML = "";
+
+  if (document.querySelector("#animal-groups").checked) {
+    generateGroupLoop(wolffish, "Wolffish");
+    generateGroupLoop(frilledSharks, "Sharks");
+    generateGroupLoop(spiderCrabs, "Crabs");
+  } else {
+    generateGroupLoop(allNologists, "Group");
+  }
+  flashColours(createColourArray());
+});
 
 document.querySelector("form").addEventListener("keydown", event => {
-  if (event.which === 13 && numberPerGroup.value <= nologists.filter(nologist => nologist).length) {
+  if (event.which === 13 && numberPerGroup.value <= allNologists.filter(nologist => nologist).length) {
     event.preventDefault();
-    generateGroupLoop();
-    return false;
+    document.querySelector("main").innerHTML = "";
+
+    if (document.querySelector("#animal-groups").checked) {
+      generateGroupLoop(wolffish, "Wolffish");
+      generateGroupLoop(frilledSharks, "Sharks");
+      generateGroupLoop(spiderCrabs, "Crabs");
+    } else {
+      generateGroupLoop(allNologists, "Group");
+    }
   }
 });
 
-numberPerGroup.max = nologists.filter(nologist => nologist).length;
+numberPerGroup.max = allNologists.filter(nologist => nologist).length;
 numberPerGroup.min = 1;
