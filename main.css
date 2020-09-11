@@ -6,8 +6,8 @@
 }
 
 header {
-  background-color: black;
-  color: white;
+  background-color: #141414;
+  color: #f0f0f0;
   text-align: center;
   height: 30vh;
   padding: 8px 0;
@@ -73,7 +73,11 @@ form label {
 
 form input {
   background-color: rgb(44, 44, 44);
-  width: 30%;
+  width: 50%;
+}
+
+#animal-groups {
+  width: 10%;
 }
 
 main {
@@ -94,6 +98,18 @@ main {
   border-radius: 10px;
   transition: 0.5s;
   background-color: white;
+}
+
+.Wolffish {
+  background-color: #7fffd4;
+}
+
+.Crabs {
+  background-color: #eee8aa;
+}
+
+.Sharks {
+  background-color: #98fb98;
 }
 
 h3 {

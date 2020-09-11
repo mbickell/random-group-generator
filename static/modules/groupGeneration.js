@@ -23,7 +23,7 @@ export const createGroupContainers = (numberOfGroups, groupName) => {
   for (let i = 1; i <= numberOfGroups; i++)
     document.querySelector(
       "main"
-    ).innerHTML += `<section class="group" ><h3>${groupName} ${i}</h3><ul id="${groupName}-${i}"></ul></section>`;
+    ).innerHTML += `<section class="group ${groupName}" ><h3>${groupName} ${i}</h3><ul id="${groupName}-${i}"></ul></section>`;
 };
 
 export const insertNologists = (groups, groupName) => {
@@ -55,6 +55,7 @@ export const createColourArray = () => {
     const b = generateRandomNumber(256);
     colorArray.push(`rgb(${r}, ${g}, ${b})`);
   }
+  colorArray.push("rgb(240, 240, 240)");
   return colorArray;
 };
 
