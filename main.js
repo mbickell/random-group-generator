@@ -43,8 +43,8 @@ const generateAnimalOrCourseGroups = () => {
 
   if (document.querySelector("#animal-groups").checked) {
     generateGroupLoop(wolffish, "Wolffish");
-    generateGroupLoop(frilledSharks, "Sharks");
     generateGroupLoop(spiderCrabs, "Crabs");
+    generateGroupLoop(frilledSharks, "Sharks");
   } else {
     generateGroupLoop(allNologists, "Group");
   }
