@@ -1,14 +1,14 @@
 export const generateRandomNumber = maximumNumber => Math.floor(Math.random() * maximumNumber);
 
-export const findNumberOfGroups = (peoplePerGroup, nologists) =>
-  nologists.length % peoplePerGroup ? Math.ceil(nologists.length / peoplePerGroup) : nologists.length / peoplePerGroup;
+export const findNumberOfGroups = (peoplePerGroup, people) =>
+  people.length % peoplePerGroup ? Math.ceil(people.length / peoplePerGroup) : people.length / peoplePerGroup;
 
-export const randomiseNologists = orderedNologists => orderedNologists.sort((a, b) => 0.5 - Math.random());
+export const randomisePeople = orderedPeople => orderedPeople.sort((a, b) => 0.5 - Math.random());
 
-export const createRandomGroups = (randomNologists, peoplePerGroup) => {
+export const createRandomGroups = (randomPeople, peoplePerGroup) => {
   const groups = [];
 
-  randomNologists.forEach((nologist, index) => {
+  randomPeople.forEach((nologist, index) => {
     if (!groups[Math.floor(index / peoplePerGroup)]) {
       groups[Math.floor(index / peoplePerGroup)] = [nologist];
     } else {
@@ -30,7 +30,7 @@ export const createGroupContainers = (numberOfGroups, groupName) => {
     ).innerHTML += `<section class="group ${groupName}" ><h3>${groupName} ${i}</h3><ul id="${groupName}-${i}"></ul></section>`;
 };
 
-export const insertNologists = (groups, groupName) => {
+export const insertPeople = (groups, groupName) => {
   groups.forEach((group, groupNumber) => {
     const groupContainer = document.querySelector(`#${groupName}-${groupNumber + 1}`);
     group.forEach(nologist => {
@@ -39,16 +39,9 @@ export const insertNologists = (groups, groupName) => {
   });
 };
 
-export const addCheckboxes = nologists => {
-  const aside = document.querySelector("aside");
-  nologists.forEach((nologist, index) => {
-    aside.innerHTML += `
-      <div>
-        <input type="checkbox" id=nologist-${index} name=nologist-${index} value=${nologist} checked>
-        <label for=nologist-${index}>${nologist}</label>
-      </div>
-    `;
-  });
+export const insertDefaultPeopleInTextAre = people => {
+  const textArea = document.querySelector("#people");
+    textArea.value = people.join(", ");
 };
 
 export const createColourArray = () => {

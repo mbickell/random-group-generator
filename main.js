@@ -1,66 +1,53 @@
-import { allNologists, wolffish, frilledSharks, spiderCrabs } from "./static/data/nologsists.js";
+let allPeople = ["Matt", "Rebecca", "Charlie", "Charlotte", "Sean "];
 
 import {
-  randomiseNologists,
-  findNumberOfGroups,
+  randomisePeople,
   createRandomGroups,
   createGroupContainers,
-  insertNologists,
-  addCheckboxes,
+  insertPeople,
+  insertDefaultPeopleInTextAre,
   createColourArray,
   flashColours
 } from "./static/modules/groupGeneration.js";
 
-addCheckboxes(allNologists);
-
-const checkboxes = document.querySelectorAll("aside input");
 const numberPerGroup = document.querySelector("#number-of-people-per-group");
+const textArea = document.querySelector("#people");
 
-checkboxes.forEach(checkbox => {
-  checkbox.addEventListener("click", event => {
-    const id = event.target.id.replace(/\D/g, "");
-
-    allNologists.includes(event.target.value) ? (allNologists[id] = "") : (allNologists[id] = event.target.value);
-    numberPerGroup.max = allNologists.filter(nologist => nologist).length;
-  });
-});
-
-const generateGroupLoop = (nologists, groupName) => {
-  const filteredNologists = nologists.filter(nologist => nologist).sort();
-  const randomNologists = randomiseNologists(filteredNologists);
+const generateGroupLoop = (people, groupName) => {
+  const randomPeople = randomisePeople(people);
 
   const peoplePerGroup = numberPerGroup.value;
-  // const numberOfGroups = findNumberOfGroups(peoplePerGroup, randomNologists);
 
-  const groups = createRandomGroups(randomNologists, peoplePerGroup);
+  const groups = createRandomGroups(randomPeople, peoplePerGroup);
 
   createGroupContainers(groups.length, groupName);
-  insertNologists(groups, groupName);
+  insertPeople(groups, groupName);
 };
 
-const generateAnimalOrCourseGroups = () => {
-  document.querySelector("main").innerHTML = "";
+document.querySelector("form").addEventListener("submit", (event) => {
+  event.preventDefault();
 
-  if (document.querySelector("#animal-groups").checked) {
-    generateGroupLoop(wolffish, "Wolffish");
-    generateGroupLoop(spiderCrabs, "Crabs");
-    generateGroupLoop(frilledSharks, "Sharks");
-  } else {
-    generateGroupLoop(allNologists, "Group");
-  }
-  flashColours(createColourArray());
-};
+  if (numberPerGroup.value <= allPeople.length) {
+    document.querySelector("main").innerHTML = "";
 
-document.querySelector("#generateButton").addEventListener("click", () => {
-  generateAnimalOrCourseGroups();
-});
+    const people = textArea.value;
+    const peopleArr = people.split(",");
 
-document.querySelector("form").addEventListener("keydown", event => {
-  if (event.which === 13 && numberPerGroup.value <= allNologists.filter(nologist => nologist).length) {
-    event.preventDefault();
-    generateAnimalOrCourseGroups();
+    generateGroupLoop(peopleArr, "Group");
+    flashColours(createColourArray());
   }
 });
 
-numberPerGroup.max = allNologists.filter(nologist => nologist).length;
+numberPerGroup.max = allPeople.length;
 numberPerGroup.min = 1;
+
+insertDefaultPeopleInTextAre(allPeople);
+
+textArea.addEventListener("input", (event) => {
+  const names = event.target.value;
+
+  allPeople = names.split(",");
+  const allPeopleLength = allPeople.length;
+
+  numberPerGroup.max = allPeopleLength;
+});

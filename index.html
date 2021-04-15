@@ -11,23 +11,22 @@
   <body>
     <header>
       <h1>Random Group Generator</h1>
-      <!-- <h2>Made with love and care, for Dan</h2> -->
-      <!-- <button>Generate</button> -->
       <section class="head">
-        <aside></aside>
+        <aside>
+          <label for="people">Please enter each name, separated by a comma:</label>
+          <textarea name="people" id="people" cols="5" rows="8"></textarea>
+        </aside>
+
         <form>
           <label for="number-of-people-per-group">Number of people per group:</label>
-          <input type="number" id="number-of-people-per-group" name="number-of-people-per-group" value="3" min="1" />
-          <div>
-            <input type="checkbox" id="animal-groups" name="animal-groups" value="animal-groups" />
-            <label for="animal-groups">Animal groups?</label>
-          </div>
-          <input type="button" value="Generate Groups" id="generateButton" />
+          <input type="number" id="number-of-people-per-group" name="number-of-people-per-group" value="2" min="1" />
+          <input type="submit" value="Generate Groups" id="generateButton" />
         </form>
       </section>
     </header>
 
     <main></main>
+
     <script type="module" src="main.js"></script>
   </body>
 </html>
